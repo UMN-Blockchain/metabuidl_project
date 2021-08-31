@@ -1,0 +1,27 @@
+{
+  "name": "metabuidl_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UMN-Blockchain/metabuidl_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UMN-Blockchain/metabuidl_project/issues"
+  },
+  "homepage": "https://github.com/UMN-Blockchain/metabuidl_project#readme",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.5.0",
+    "web3": "^1.5.2",
+    "web3-provider-engine": "^16.0.3"
+  }
+}
