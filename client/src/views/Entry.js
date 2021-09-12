@@ -1,56 +1,80 @@
 import React, { useState, useEffect } from "react";
 
-import { makeStyles } from '@material-ui/core/styles';
+// import { createShares, recoverKey } from "../libraries/secret_sharing";
+import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, TextField } from "@material-ui/core";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import Checkbox from '@material-ui/core/Checkbox';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import Checkbox from "@material-ui/core/Checkbox";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 function Entry() {
+  const handleRegister = async () => {
+    if (privateKey === "") return;
+    let authCount = 0;
+    for (let i = 0; i < auths.length; i++) {
+      if (auths[i].selected) authCount++;
+    }
 
-  const handleRegister = (privateKey) => {
+    try {
+      // console.log(
+      //   await createShares(
+      //     privateKey,
+      //     authCount,
+      //     authCount - 1,
+      //     prompt("Enter a passphrase:")
+      //   )
+      // );
+    } catch (error) {
+      alert("Error: " + error);
+    }
     // TODO
-    // Scrambling stuff
     // IPFS stuff?
     // Call a smart contract function
-    console.log("hello")
-  }
+  };
 
   const [auths, setAuths] = useState([]);
   const [selectedAuths, setSelectedAuths] = useState([]);
   const [privateKey, setPrivateKey] = useState("");
 
-
   const dummyAuthenticators = [
     { name: "Auth 1", address: "1", verifiationMethod: "SMS", selected: false },
-    { name: "Auth 2", address: "2", verifiationMethod: "Email", selected: false },
+    {
+      name: "Auth 2",
+      address: "2",
+      verifiationMethod: "Email",
+      selected: false,
+    },
     { name: "Auth 3", address: "3", verifiationMethod: "ID", selected: false },
     { name: "Auth 4", address: "4", verifiationMethod: "SMS", selected: false },
-    { name: "Auth 5", address: "5", verifiationMethod: "Email", selected: false }
+    {
+      name: "Auth 5",
+      address: "5",
+      verifiationMethod: "Email",
+      selected: false,
+    },
   ];
-
 
   // Updates state when user clicks on checkbox in table
   const selectAuth = (e, selectedAuth) => {
-    let updatedList = auths.map(auth => {
+    let updatedList = auths.map((auth) => {
       if (auth.address === selectedAuth.address) {
         return { ...auth, selected: !auth.selected };
       }
       return auth;
-    })
+    });
     setAuths(updatedList);
-    console.log(auths)
-  }
+    console.log(auths);
+  };
 
   const handlePrivateKeyInput = (e) => {
     setPrivateKey(e.target.value);
-  }
+  };
 
   const useStyles = makeStyles({
     table: {
@@ -59,20 +83,20 @@ function Entry() {
     tableRow: {
       hover: {
         "&$hover:hover": {
-          backgroundColor: '#49bb7b',
+          backgroundColor: "#49bb7b",
         },
       },
-      cursor: "grab"
+      cursor: "grab",
     },
     authBorder: {
       border: "1px solid black",
       maxWidth: "15%",
       padding: "10px",
-      margin: "10px"
+      margin: "10px",
     },
     selectedAuth: {
-      display: "flex"
-    }
+      display: "flex",
+    },
   });
 
   const classes = useStyles();
@@ -87,8 +111,20 @@ function Entry() {
         <Typography variant="h3">Secure private key</Typography>
       </Grid>
       <Grid item xs={12}>
-        <form noValidate autoComplete="off" onSubmit={handleRegister}>
-          <TextField required id="outlined-basic" label="Enter private key" variant="outlined" onChange={handlePrivateKeyInput} />
+        <form
+          noValidate
+          autoComplete="off"
+          onSubmit={() => {
+            handleRegister();
+          }}
+        >
+          <TextField
+            required
+            id="outlined-basic"
+            label="Enter private key"
+            variant="outlined"
+            onChange={handlePrivateKeyInput}
+          />
           <br />
           <br />
           <br />
@@ -96,12 +132,15 @@ function Entry() {
           <br />
           <br />
           <div className={classes.selectedAuth}>
-            {auths.map((auth) => (
-              auth.selected ?
-                <p key={auth.address} className={classes.authBorder}>{auth.name} {auth.verifiationMethod}</p>
-                :
+            {auths.map((auth) =>
+              auth.selected ? (
+                <p key={auth.address} className={classes.authBorder}>
+                  {auth.name} {auth.verifiationMethod}
+                </p>
+              ) : (
                 <p key={auth.address}></p>
-            ))}
+              )
+            )}
           </div>
           <br />
           <br />
@@ -111,16 +150,24 @@ function Entry() {
               <TableHead>
                 <TableRow>
                   <TableCell></TableCell>
-                  <TableCell><b>Auth</b></TableCell>
-                  <TableCell align="left"><b>Verifiation method</b></TableCell>
+                  <TableCell>
+                    <b>Auth</b>
+                  </TableCell>
+                  <TableCell align="left">
+                    <b>Verifiation method</b>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {auths.map((auth) => (
-                  <TableRow key={auth.address} hover className={classes.tableRow}>
+                  <TableRow
+                    key={auth.address}
+                    hover
+                    className={classes.tableRow}
+                  >
                     <TableCell className="selectCheckbox" padding="checkbox">
                       <Checkbox
-                        onClick={event => selectAuth(event, auth)}
+                        onClick={(event) => selectAuth(event, auth)}
                         className="selectCheckbox"
                         checked={auth.selected}
                       />
@@ -136,14 +183,13 @@ function Entry() {
           </TableContainer>
           <br />
           <br />
-          <Button type="submit" variant="contained">Register</Button>
+          <Button type="submit" variant="contained">
+            Register
+          </Button>
         </form>
       </Grid>
-    </Grid >
-  )
+    </Grid>
+  );
 }
 
-export default Entry
-
-
-
+export default Entry;
