@@ -31,4 +31,9 @@ module.exports = {
       from: "0x25cA509D99c8B5F2e08B317117479D3d2006484B",
     },
   },
+  compilers: {
+    solc: {
+      version: "0.8.3",
+    },
+  },
 };

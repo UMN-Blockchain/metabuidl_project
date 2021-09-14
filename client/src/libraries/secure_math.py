@@ -36,12 +36,17 @@ def x_gcd(a, b):
         quot = a // b
         a, b = b, a % b
         x, last_x = last_x - quot * x, x
-    return last_x
+
+    return last_x 
+
+def mod_div(num, den, mod):
+  print(num)
+  return num * x_gcd(den, mod)
 
 def interpolate(points, mod, x = 0):
   """Interpolate polynomial with given points over finite field corresponding to prime mod and evaluate at x """
   PI = lambda vals: reduce(lambda x, y: x*y, vals)
-  mod_div = lambda num, den: num * x_gcd(den, mod)
+
   # mod_div finds num / den modulo prime p
   # return satisfies: den * _divmod(num, den, p) % p == num
   x_arr, y_arr = zip(*points)
@@ -52,8 +57,13 @@ def interpolate(points, mod, x = 0):
       nums.append(PI(x - other for other in others))
       dens.append(PI(cur - other for other in others))
   den = PI(dens)
-  num = sum([mod_div(nums[i] * den * y % mod, dens[i]) for i, y in enumerate(y_arr)])
-  return (mod_div(num, den) + mod) % mod
+  num = ([mod_div(((nums[i]% mod) * (den% mod)) % mod * (y % mod), dens[i], mod) % mod for i, y in enumerate(y_arr)])
+  for i,y in enumerate(y_arr):
+    print("nums[i]: ", nums[i])
+    print("den: ", den)
+    print("y: ", y)
+    print("mod_div 1st arg:", nums[i] * den * y % mod)
+  return (mod_div(num, den, mod) + mod) % mod
 
 def encode_str(key_str):
   """Map string to unique integer"""
