@@ -22,19 +22,19 @@ interface IPassify {
     function addRecord(address[] memory custodians) external;
 
     /**
-     * @dev User calls this function when they wish to unlock their password 
+     * @dev User calls this function when they wish to unlock their password
      * (after verifying their identity).
      *
-     * Emits a {Pay} event 
+     * Emits a {Pay} event
      */
     function pay(uint256 recordId) external;
 
     /**
      * CURRENTLY UNIMPLEMENTED
-     * @dev User calls this function when they contend that custodians have not sent 
+     * @dev User calls this function when they contend that custodians have not sent
      * the correct information
-     * 
-     * Emits a {Dispute} event 
+     *
+     * Emits a {Dispute} event
      */
     function dispute(uint256 recordId, address custodian) external;
 
@@ -44,4 +44,6 @@ interface IPassify {
      * msg.value >= fixed stake amount
      */
     function stake() payable external;
+
+    function getCustodianURI() external;
 }

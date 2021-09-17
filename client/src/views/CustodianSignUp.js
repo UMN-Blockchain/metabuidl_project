@@ -25,17 +25,13 @@ class CustodianSignUp extends React.Component {
   }
 
   handleSubmit(event){
-    event.preventDefault();
-    //get JSON file
-
-    //update JSON file
-
+    event.preventDefault(); 
     //make JSON file
     var blob = new Blob([JSON.stringify], {type:  "application/json"});
     const jsonFile = [new File([blob], "ipfsAuth.json")];
     let cid = storeFileWeb3(jsonFile);
-    cid.then(function(word){
-      alert(word);
+    cid.then(function(cidString){
+      ////
     });
   }
 
