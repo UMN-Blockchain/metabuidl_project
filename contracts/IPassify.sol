@@ -13,7 +13,7 @@ interface IPassify {
     /**
      * @dev Emitted when `user` disputes that `custodian` has returned correct data for `recordId`.
      */
-    event Dispute(address indexed user, address indexed custodian, uint256 indexed recordId);
+    event Dispute(address indexed user, uint256 indexed recordId, address indexed custodian);
 
 
     /**
