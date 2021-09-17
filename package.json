@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/UMN-Blockchain/metabuidl_project#readme",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.3.2",
     "@truffle/hdwallet-provider": "^1.5.0",
     "web3": "^1.5.2",
     "web3-provider-engine": "^16.0.3",

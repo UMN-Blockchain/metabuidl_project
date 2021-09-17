@@ -1,0 +1,373 @@
+{
+  "contractName": "Passify",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.3+commit.8d00100c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/Kuan/Documents/GitHub/metabuidl_project/contracts/Passify.sol\":\"Passify\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/Kuan/Documents/GitHub/metabuidl_project/contracts/Passify.sol\":{\"keccak256\":\"0x82a1d17d3137aa9cfd466055a90580722a33e091cf2704e2aa075349aeb26ad5\",\"urls\":[\"bzz-raw://febc24eb9aa2d6ab223b9314bbbb9fface18c26fb21ef7b3d6c0043e4cf38cf1\",\"dweb:/ipfs/QmbtjuzWXMSeKCMHPtZvEZUbKYkhPoPvxLgNZ6xpT5WAMQ\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212207bde3575ca931a8497b040995efaa01fc01347a4bb427f470b532a6c479a561c64736f6c63430008030033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212207bde3575ca931a8497b040995efaa01fc01347a4bb427f470b532a6c479a561c64736f6c63430008030033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "29:288:1:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "29:288:1:-:0;;;;;",
+  "source": "pragma solidity ^0.8.3;\r\n\r\n\r\ncontract Passify {\r\n\r\n    // store custodian prices for each recprd \r\n    struct Record {\r\n        uint8 min; \r\n        address[] custodians;\r\n    } // round up to 8 bytes \r\n\r\n    mapping(uint256 => Record) _records; \r\n\r\n    // function pay(address[] memory custodians) {\r\n\r\n    // }\r\n\r\n}",
+  "sourcePath": "C:/Users/Kuan/Documents/GitHub/metabuidl_project/contracts/Passify.sol",
+  "ast": {
+    "absolutePath": "/C/Users/Kuan/Documents/GitHub/metabuidl_project/contracts/Passify.sol",
+    "exportedSymbols": {
+      "Passify": [
+        30
+      ]
+    },
+    "id": 31,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 18,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".3"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 30,
+        "linearizedBaseContracts": [
+          30
+        ],
+        "name": "Passify",
+        "nameLocation": "38:7:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Passify.Record",
+            "id": 24,
+            "members": [
+              {
+                "constant": false,
+                "id": 20,
+                "mutability": "mutable",
+                "name": "min",
+                "nameLocation": "134:3:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 24,
+                "src": "128:9:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 19,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "128:5:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 23,
+                "mutability": "mutable",
+                "name": "custodians",
+                "nameLocation": "159:10:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 24,
+                "src": "149:20:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                  "typeString": "address[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 21,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "149:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 22,
+                  "nodeType": "ArrayTypeName",
+                  "src": "149:9:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                    "typeString": "address[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Record",
+            "nameLocation": "110:6:1",
+            "nodeType": "StructDefinition",
+            "scope": 30,
+            "src": "103:74:1",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 29,
+            "mutability": "mutable",
+            "name": "_records",
+            "nameLocation": "236:8:1",
+            "nodeType": "VariableDeclaration",
+            "scope": 30,
+            "src": "209:35:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Record_$24_storage_$",
+              "typeString": "mapping(uint256 => struct Passify.Record)"
+            },
+            "typeName": {
+              "id": 28,
+              "keyType": {
+                "id": 25,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "217:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "209:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Record_$24_storage_$",
+                "typeString": "mapping(uint256 => struct Passify.Record)"
+              },
+              "valueType": {
+                "id": 27,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 26,
+                  "name": "Record",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 24,
+                  "src": "228:6:1"
+                },
+                "referencedDeclaration": 24,
+                "src": "228:6:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Record_$24_storage_ptr",
+                  "typeString": "struct Passify.Record"
+                }
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "scope": 31,
+        "src": "29:288:1"
+      }
+    ],
+    "src": "0:317:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/Users/Kuan/Documents/GitHub/metabuidl_project/contracts/Passify.sol",
+    "exportedSymbols": {
+      "Passify": [
+        30
+      ]
+    },
+    "id": 31,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 18,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".3"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 30,
+        "linearizedBaseContracts": [
+          30
+        ],
+        "name": "Passify",
+        "nameLocation": "38:7:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Passify.Record",
+            "id": 24,
+            "members": [
+              {
+                "constant": false,
+                "id": 20,
+                "mutability": "mutable",
+                "name": "min",
+                "nameLocation": "134:3:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 24,
+                "src": "128:9:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 19,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "128:5:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 23,
+                "mutability": "mutable",
+                "name": "custodians",
+                "nameLocation": "159:10:1",
+                "nodeType": "VariableDeclaration",
+                "scope": 24,
+                "src": "149:20:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                  "typeString": "address[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 21,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "149:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 22,
+                  "nodeType": "ArrayTypeName",
+                  "src": "149:9:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                    "typeString": "address[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Record",
+            "nameLocation": "110:6:1",
+            "nodeType": "StructDefinition",
+            "scope": 30,
+            "src": "103:74:1",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 29,
+            "mutability": "mutable",
+            "name": "_records",
+            "nameLocation": "236:8:1",
+            "nodeType": "VariableDeclaration",
+            "scope": 30,
+            "src": "209:35:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Record_$24_storage_$",
+              "typeString": "mapping(uint256 => struct Passify.Record)"
+            },
+            "typeName": {
+              "id": 28,
+              "keyType": {
+                "id": 25,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "217:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "209:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Record_$24_storage_$",
+                "typeString": "mapping(uint256 => struct Passify.Record)"
+              },
+              "valueType": {
+                "id": 27,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 26,
+                  "name": "Record",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 24,
+                  "src": "228:6:1"
+                },
+                "referencedDeclaration": 24,
+                "src": "228:6:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Record_$24_storage_ptr",
+                  "typeString": "struct Passify.Record"
+                }
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "scope": 31,
+        "src": "29:288:1"
+      }
+    ],
+    "src": "0:317:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.3+commit.8d00100c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-09-14T22:35:47.823Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

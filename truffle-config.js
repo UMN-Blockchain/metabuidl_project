@@ -9,6 +9,7 @@ module.exports = {
   },
   compilers: {
     solc: {
+<<<<<<< HEAD
       settings: {
         optimizer: {
           enabled: true, // Default: false
@@ -24,4 +25,9 @@ module.exports = {
       }
     }
   }
+=======
+      version: "0.8.3",
+    },
+  },
+>>>>>>> 2e5f97d0ffaaf3b4d3f02bca2a1eb408a4e8c2eb
 };

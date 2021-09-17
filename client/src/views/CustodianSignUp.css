@@ -1,0 +1,8 @@
+input{
+  width: 40vw;
+  height:40px;
+}
+input[type="submit"]{
+  width:70px;
+  margin-top:20px;
+}
