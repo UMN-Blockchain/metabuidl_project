@@ -36,7 +36,7 @@ interface IPassify {
      * 
      * Emits a {Dispute} event 
      */
-    function dispute(uint256 recordId, uint256 custodianId) external;
+    function dispute(uint256 recordId, address custodian) external;
 
     /**
      * @dev Custodian calls this function to register their service on our platform
