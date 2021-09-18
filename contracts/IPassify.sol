@@ -32,7 +32,7 @@ interface IPassify {
      *
      * Emits a {Pay} event
      */
-    function pay(uint256 recordId) external;
+    function pay(uint256 recordId) external payable;
 
     /**
      * CURRENTLY UNIMPLEMENTED

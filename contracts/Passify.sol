@@ -6,14 +6,15 @@ import "./IPassify.sol";
 contract Passify is IPassify {
     constructor() IPassify() {}
 
-    uint _stake = 0.0029 ether;
+    uint _price = 0.29 ether; // $100, Sep 18, 2021
+    uint _stake = 0.0029 ether; // $1, Sep 18, 2021
 
     struct Record {
         uint8 min;
         address[] custodians;
     }
 
-    Record[] public _records; 
+    Record[] private _records; 
 
     address[] _custodians;
     mapping(address => string) _custodianURIs; // the link to custodian information (stored on IPFS)
@@ -32,7 +33,9 @@ contract Passify is IPassify {
      *
      * Emits a {Pay} event 
      */
-    function pay(uint256 recordId) external override {
+    function pay(uint256 recordId) external payable override {
+        uint numCustodians = _records[recordId].custodians.length;
+        require(msg.value > (_price * numCustodians));
         emit Pay(msg.sender, recordId);
     }
 
