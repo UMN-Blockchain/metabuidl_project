@@ -40,6 +40,7 @@ function Retrieve() {
     }
   }
 
+  console.log(passifyContract)
 
 
   return (

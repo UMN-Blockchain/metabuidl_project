@@ -14,6 +14,19 @@ async function storeFileWeb3(file) {
   console.log('stored files with cid:', cid);
   return cid;
 }
+
+async function retrieve(cid) {
+  const client = makeStorageClient()
+  const res = await client.get(cid)
+  console.log(`Got a response! [${res.status}] ${res.statusText}`)
+  if (!res.ok) {
+    throw new Error(`failed to get ${cid}`)
+  }
+
+  return res;
+}
+
 export {
-  storeFileWeb3
+  storeFileWeb3,
+  retrieve
 }

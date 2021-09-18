@@ -12,14 +12,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+import { retrieve } from "../libraries/ipfsAuthenticate.js";
+
 import UserContext from "../context/UserContext";
 
 function Entry() {
 
   const { account, passifyContract, web3 } = useContext(UserContext);
-
-
-
 
 
   const handleRegister = async (privateKey) => {
@@ -47,6 +46,9 @@ function Entry() {
   const [userEmail, setUserEmail] = useState([]);
   const [userSMS, setUserSMS] = useState([]);
   const [userID, setUserID] = useState([]);
+  const [custodianData, setCustodianData] = useState([]);
+
+
 
 
   const dummyAuthenticators = [
@@ -101,7 +103,35 @@ function Entry() {
 
   useEffect(() => {
     setAuths(dummyAuthenticators);
-  }, []);
+
+    async function fetchCustodian() {
+      console.log(passifyContract != null)
+      if (passifyContract != null) {
+        console.log(passifyContract);
+        const custodians = await passifyContract.methods.getCustodians().call();
+
+        for (let custodian of custodians) {
+
+          let custodianURI = await passifyContract.methods.getCustodianURI(custodian).call();
+          let data = await retrieve(custodianURI);
+
+          let obj = {
+            "name": data.name,
+            "description": data.description,
+            "uri": data.uri
+          }
+
+          setCustodianData([...custodianData, obj]);
+
+
+        }
+      }
+
+    }
+    fetchCustodian();
+  }, [passifyContract]);
+
+
 
   return (
     <Grid container spacing={3} alignItems="center">

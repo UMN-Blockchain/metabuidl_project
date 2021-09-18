@@ -38,8 +38,13 @@ const App = () => {
 
         const PassifyContract = new web3.eth.Contract(
           Passify.abi,
-          Passify.networks[networkId] && Passify.networks[networkId].address
+          Passify.networks[networkId] && Passify.networks[networkId].address,
+          { from: account, gasLimit: 1000000 }
         );
+
+        console.log(account, networkId)
+
+        console.log(await PassifyContract.methods.getCustodians().call())
 
         // Set web3, accounts, and contract to the state
         setWeb3(web3);
