@@ -45,5 +45,18 @@ interface IPassify {
      */
     function stake() payable external;
 
-    function getCustodianURI() external;
+    /**
+     * @dev Returns all registered custodians. 
+    */ 
+    function getCustodians() external returns(address[] memory) ;
+
+    /**
+     * @dev Returns the URI that holds custodian information. 
+    */
+    function getCustodianURI(address custodian) external returns(string memory);
+
+    /**
+     * @dev Returns all registered custodians. 
+    */ 
+    function getRecord(uint256 recordId) external returns(uint8, address[] memory) ;
 }

@@ -11,12 +11,11 @@ contract Passify is IPassify {
         address[] custodians;
     } 
 
-    mapping(uint256 => Record) _records; 
-    uint256 _recordsCount;
+    Record[] _records; 
 
-    mapping(uint256 => address) _custodians;
-    mapping(uint256 => string) _custodianURIs; // the link to custodian information (stored on IPFS)
-    uint256 _custodiansCount;
+    address[] _custodians;
+    mapping(address => string) _custodianURIs; // the link to custodian information (stored on IPFS)
+    
     /**
      * @dev User calls this function when they register a new record. No fees paid.
      */
@@ -52,5 +51,23 @@ contract Passify is IPassify {
      */
     function stake() payable external override{
         return;
+    }
+
+    /**
+     * @dev Returns all registered custodians. 
+    */ 
+    function getCustodians() external override view returns(address[] memory) {
+        return _custodians;
+    }
+
+    /**
+     * @dev Returns the URI that holds custodian information. 
+    */
+    function getCustodianURI(address custodian) external override view returns(string memory) {
+        return _custodianURIs[custodian]; 
+    }
+
+    function getRecord(uint256 recordId) external override view returns(uint8, address[] memory) {
+        return (_records[recordId].min, _records[recordId].custodians);
     }
 }
