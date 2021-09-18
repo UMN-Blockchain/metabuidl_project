@@ -19,14 +19,19 @@ function Entry() {
   const handleRegister = async () => {
     const selectedAuths = auths.filter((auth) => auth.selected);
     const authCount = selectedAuths.length;
-    // TODO
+  
     let shares = createShares(encodeStr(privateKey), authCount, authCount - 1);
     // Call a smart contract function
     let addRecordCall = await passifyContract.methods.addRecord(
       selectAuth.map((auth) => auth.address)
     );
 
-    // console.log(addRecordCall.events.RecordAdded.returnValues.)
+    const recordId = addRecordCall.events.RecordAdded.returnValues.recordId;
+
+    alert("added to " + recordId);
+
+    // send it to each custodian 
+    
   };
 
   const { account, passifyContract, web3 } = useContext(UserContext);
