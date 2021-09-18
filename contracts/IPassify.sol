@@ -54,4 +54,9 @@ interface IPassify {
      * @dev Returns the URI that holds custodian information. 
     */
     function getCustodianURI(address custodian) external returns(string memory);
+
+    /**
+     * @dev Returns all registered custodians. 
+    */ 
+    function getRecord(uint256 recordId) external returns(uint8, address[] memory) ;
 }

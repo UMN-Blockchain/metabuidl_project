@@ -11,8 +11,7 @@ contract Passify is IPassify {
         address[] custodians;
     } 
 
-    mapping(uint256 => Record) _records; 
-    uint256 _recordsCount;
+    Record[] _records; 
 
     address[] _custodians;
     mapping(address => string) _custodianURIs; // the link to custodian information (stored on IPFS)
@@ -66,5 +65,9 @@ contract Passify is IPassify {
     */
     function getCustodianURI(address custodian) external override view returns(string memory) {
         return _custodianURIs[custodian]; 
+    }
+
+    function getRecord(uint256 recordId) external override view returns(uint8, address[] memory) {
+        return (_records[recordId].min, _records[recordId].custodians);
     }
 }
