@@ -11,6 +11,11 @@ interface IPassify {
     event Pay(address indexed user, uint256 indexed recordId);
 
     /**
+     * @dev Emitted when `user` .
+     */
+    event RecordAdded(address indexed user, uint256 indexed recordId);
+
+    /**
      * @dev Emitted when `user` disputes that `custodian` has returned correct data for `recordId`.
      */
     event Dispute(address indexed user, uint256 indexed recordId, address indexed custodian);
