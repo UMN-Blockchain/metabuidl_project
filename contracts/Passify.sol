@@ -6,12 +6,14 @@ import "./IPassify.sol";
 contract Passify is IPassify {
     constructor() IPassify() {}
 
-    struct Record {
-        uint8 min; 
-        address[] custodians;
-    } 
+    uint _stake = 0.0029 ether;
 
-    Record[] _records; 
+    struct Record {
+        uint8 min;
+        address[] custodians;
+    }
+
+    Record[] public _records; 
 
     address[] _custodians;
     mapping(address => string) _custodianURIs; // the link to custodian information (stored on IPFS)
@@ -19,8 +21,9 @@ contract Passify is IPassify {
     /**
      * @dev User calls this function when they register a new record. No fees paid.
      */
-    function addRecord(address[] memory custodians) external override {
-        return;
+    function addRecord(uint8 min, address[] memory custodians) external override {
+        _records.push(Record(min, custodians));
+        emit RecordAdded(msg.sender, _records.length - 1); // index in records list is recordId
     }
 
     /**
@@ -49,8 +52,10 @@ contract Passify is IPassify {
      * Requirement:
      * msg.value >= fixed stake amount
      */
-    function stake() payable external override{
-        return;
+    function stake(string calldata custodianURI) payable external override{
+        require(bytes(_custodianURIs[msg.sender]).length != 0  && msg.value > _stake);
+        _custodians.push(msg.sender);
+        _custodianURIs[msg.sender] = custodianURI;
     }
 
     /**
