@@ -26,7 +26,7 @@ function Entry() {
       selectAuth.map((auth) => auth.address)
     );
 
-    console.log(addRecordCall.events.RecordAdded.returnValues.)
+    // console.log(addRecordCall.events.RecordAdded.returnValues.)
   };
 
   const { account, passifyContract, web3 } = useContext(UserContext);
@@ -162,15 +162,49 @@ function Entry() {
                     </TableCell>
                     <TableCell align="left">{auth.verifiationMethod}</TableCell>
                     <TableCell align="left">
-                      {
-                        (() => {
-                          switch (auth.verifiationMethod) {
-                            case "Email": return <TextField required align="left" id="outlined-basic" label="Enter email" variant="outlined" onChange={(e) => setUserEmail([...userEmail, e.target.value])} />;
-                            case "SMS": return <TextField required align="left" id="outlined-basic" label="Enter SMS" variant="outlined" onChange={(e) => setUserSMS([...userSMS, e.target.value])} />;
-                            case "ID": return <TextField required align="left" id="outlined-basic" label="Enter ID" variant="outlined" onChange={(e) => setUserID([...userID, e.target.value])} />;
-                          }
-                        })()
-                      }
+                      {(() => {
+                        switch (auth.verifiationMethod) {
+                          case "Email":
+                            return (
+                              <TextField
+                                required
+                                align="left"
+                                id="outlined-basic"
+                                label="Enter email"
+                                variant="outlined"
+                                onChange={(e) =>
+                                  setUserEmail([...userEmail, e.target.value])
+                                }
+                              />
+                            );
+                          case "SMS":
+                            return (
+                              <TextField
+                                required
+                                align="left"
+                                id="outlined-basic"
+                                label="Enter SMS"
+                                variant="outlined"
+                                onChange={(e) =>
+                                  setUserSMS([...userSMS, e.target.value])
+                                }
+                              />
+                            );
+                          case "ID":
+                            return (
+                              <TextField
+                                required
+                                align="left"
+                                id="outlined-basic"
+                                label="Enter ID"
+                                variant="outlined"
+                                onChange={(e) =>
+                                  setUserID([...userID, e.target.value])
+                                }
+                              />
+                            );
+                        }
+                      })()}
                     </TableCell>
                   </TableRow>
                 ))}
