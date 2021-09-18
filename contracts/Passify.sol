@@ -6,21 +6,38 @@ import "./IPassify.sol";
 contract Passify is IPassify {
     constructor() IPassify() {}
 
+    uint _price = 0.29 ether; // $100, Sep 18, 2021
+    uint _stake = 0.0029 ether; // $1, Sep 18, 2021
+
     struct Record {
-        uint8 min; 
+        uint8 min;
         address[] custodians;
-    } 
+    }
 
-    Record[] _records; 
 
-    address[] _custodians;
-    mapping(address => string) _custodianURIs; // the link to custodian information (stored on IPFS)
+    uint _numRecords;
+    mapping(uint => Record) private _records; 
+
+    address[] private _custodians;
+    mapping(address => string) private _custodianURIs; // the link to custodian information (stored on IPFS)
     
     /**
      * @dev User calls this function when they register a new record. No fees paid.
      */
-    function addRecord(address[] memory custodians) external override{
-        return;
+    function addRecord(uint8 min, address[] memory custodians) external override {
+        uint recordId = _numRecords;
+        _records[recordId] = Record(min, custodians);
+        _numRecords++;
+        emit RecordAdded(msg.sender, recordId);
+    }
+
+    /**
+     * @dev User calls when they unregister their record. No fees paid.
+     */
+    function removeRecord(uint256 recordId) external override {
+        require(_records[recordId].min != 0);
+        delete _records[recordId];
+        _numRecords--;
     }
 
     /**
@@ -29,7 +46,9 @@ contract Passify is IPassify {
      *
      * Emits a {Pay} event 
      */
-    function pay(uint256 recordId) external override {
+    function pay(uint256 recordId) external payable override {
+        uint numCustodians = _records[recordId].custodians.length;
+        require(msg.value > (_price * numCustodians));
         emit Pay(msg.sender, recordId);
     }
 
@@ -49,8 +68,10 @@ contract Passify is IPassify {
      * Requirement:
      * msg.value >= fixed stake amount
      */
-    function stake() payable external override{
-        return;
+    function stake(string calldata custodianURI) payable external override{
+        require(bytes(_custodianURIs[msg.sender]).length != 0  && msg.value > _stake);
+        _custodians.push(msg.sender);
+        _custodianURIs[msg.sender] = custodianURI;
     }
 
     /**

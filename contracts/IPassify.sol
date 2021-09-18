@@ -6,6 +6,11 @@ pragma solidity ^0.8.3;
 interface IPassify {
 
     /**
+     * @dev Emitted when `user` establishes new record.
+     */
+    event RecordAdded(address indexed user, uint256 indexed recordId);
+
+    /**
      * @dev Emitted when `user` makes payment to unlock password stored in `recordId`.
      */
     event Pay(address indexed user, uint256 indexed recordId);
@@ -17,21 +22,26 @@ interface IPassify {
 
 
     /**
-     * @dev User calls this function when they register a new record. No fees paid.
+     * @dev User calls when they register a new record. No fees paid.
      */
-    function addRecord(address[] memory custodians) external;
+    function addRecord(uint8 min, address[] memory custodians) external;
 
     /**
-     * @dev User calls this function when they wish to unlock their password
+     * @dev User calls when they unregister their record. No fees paid.
+     */
+    function removeRecord(uint256 recordId) external;
+
+    /**
+     * @dev User calls when they wish to unlock their password.
      * (after verifying their identity).
      *
      * Emits a {Pay} event
      */
-    function pay(uint256 recordId) external;
+    function pay(uint256 recordId) external payable;
 
     /**
      * CURRENTLY UNIMPLEMENTED
-     * @dev User calls this function when they contend that custodians have not sent
+     * @dev User calls when they contend that custodians have not sent
      * the correct information
      *
      * Emits a {Dispute} event
@@ -39,11 +49,11 @@ interface IPassify {
     function dispute(uint256 recordId, address custodian) external;
 
     /**
-     * @dev Custodian calls this function to register their service on our platform
+     * @dev Custodian calls to register their service on our platform
      * Requirement:
      * msg.value >= fixed stake amount
      */
-    function stake() payable external;
+    function stake(string calldata custodianURI) payable external;
 
     /**
      * @dev Returns all registered custodians. 
