@@ -19,7 +19,7 @@ contract Passify is IPassify {
     /**
      * @dev User calls this function when they register a new record. No fees paid.
      */
-    function addRecord(address[] memory custodians) external override{
+    function addRecord(address[] memory custodians) external override {
         return;
     }
 

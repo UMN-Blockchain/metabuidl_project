@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { createShares, recoverKey } from "../libraries/secret_sharing";
 import { encodeStr, decode } from "../libraries/bigint_utils";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,15 +14,20 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
 function Entry() {
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    const selectedAuths = auths.filter((auth) => auth.selected);
+    const authCount = selectedAuths.length;
     // TODO
-    let shares = createShares(encodeStr(privateKey), 4, 3);
-    // IPFS stuff?
+    let shares = createShares(encodeStr(privateKey), authCount, authCount - 1);
     // Call a smart contract function
-    console.log(encodeStr(privateKey));
-    console.log(decode(recoverKey(shares)));
+    let addRecordCall = await passifyContract.methods.addRecord(
+      selectAuth.map((auth) => auth.address)
+    );
+
+    // console.log(addRecordCall.events.)
   };
 
+  const { passifyContract } = useContext();
   const [auths, setAuths] = useState([]);
   const [selectedAuths, setSelectedAuths] = useState([]);
   const [privateKey, setPrivateKey] = useState("");
