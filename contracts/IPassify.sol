@@ -27,6 +27,11 @@ interface IPassify {
     function addRecord(uint8 min, address[] memory custodians) external;
 
     /**
+     * @dev User calls when they unregister their record. No fees paid.
+     */
+    function removeRecord(uint256 recordId) external;
+
+    /**
      * @dev User calls when they wish to unlock their password.
      * (after verifying their identity).
      *

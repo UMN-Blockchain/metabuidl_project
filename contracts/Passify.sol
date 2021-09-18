@@ -14,17 +14,30 @@ contract Passify is IPassify {
         address[] custodians;
     }
 
-    Record[] private _records; 
 
-    address[] _custodians;
-    mapping(address => string) _custodianURIs; // the link to custodian information (stored on IPFS)
+    uint _numRecords;
+    mapping(uint => Record) private _records; 
+
+    address[] private _custodians;
+    mapping(address => string) private _custodianURIs; // the link to custodian information (stored on IPFS)
     
     /**
      * @dev User calls this function when they register a new record. No fees paid.
      */
     function addRecord(uint8 min, address[] memory custodians) external override {
-        _records.push(Record(min, custodians));
-        emit RecordAdded(msg.sender, _records.length - 1); // index in records list is recordId
+        uint recordId = _numRecords;
+        _records[recordId] = Record(min, custodians);
+        _numRecords++;
+        emit RecordAdded(msg.sender, recordId);
+    }
+
+    /**
+     * @dev User calls when they unregister their record. No fees paid.
+     */
+    function removeRecord(uint256 recordId) external override {
+        require(_records[recordId].min != 0);
+        delete _records[recordId];
+        _numRecords--;
     }
 
     /**
