@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid, TextField } from "@material-ui/core";
@@ -12,19 +12,41 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+import UserContext from "../context/UserContext";
+
 function Entry() {
 
-  const handleRegister = (privateKey) => {
+  const { account, passifyContract, web3 } = useContext(UserContext);
+
+
+
+
+
+  const handleRegister = async (privateKey) => {
     // TODO
-    // Scrambling stuff
-    // IPFS stuff?
+    // Scrambling stuff?
+    // Send data to IPFS? Database?
+
+    // pay
+    await passifyContract.methods.pay().send({ from: account });
+
     // Call a smart contract function
-    console.log("hello")
+    await passifyContract.methods.addRecord(selectedAuths).send(
+      { from: account })
+      .on("error", function (error) {
+        alert(error)
+      })
+      .on("confirmation", function (confirmationNumber, receipt) {
+        alert("successful")
+      })
   }
 
   const [auths, setAuths] = useState([]);
   const [selectedAuths, setSelectedAuths] = useState([]);
   const [privateKey, setPrivateKey] = useState("");
+  const [userEmail, setUserEmail] = useState([]);
+  const [userSMS, setUserSMS] = useState([]);
+  const [userID, setUserID] = useState([]);
 
 
   const dummyAuthenticators = [
@@ -91,9 +113,7 @@ function Entry() {
           <TextField required id="outlined-basic" label="Enter private key" variant="outlined" onChange={handlePrivateKeyInput} />
           <br />
           <br />
-          <br />
           <Typography variant="h6">Choose authentication providers:</Typography>
-          <br />
           <br />
           <div className={classes.selectedAuth}>
             {auths.map((auth) => (
@@ -104,15 +124,14 @@ function Entry() {
             ))}
           </div>
           <br />
-          <br />
-          <br />
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell></TableCell>
                   <TableCell><b>Auth</b></TableCell>
-                  <TableCell align="left"><b>Verifiation method</b></TableCell>
+                  <TableCell align="left"><b>Verification method</b></TableCell>
+                  <TableCell align="left"><b>Verification Input</b></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -129,6 +148,17 @@ function Entry() {
                       {auth.name}
                     </TableCell>
                     <TableCell align="left">{auth.verifiationMethod}</TableCell>
+                    <TableCell align="left">
+                      {
+                        (() => {
+                          switch (auth.verifiationMethod) {
+                            case "Email": return <TextField required align="left" id="outlined-basic" label="Enter email" variant="outlined" onChange={(e) => setUserEmail([...userEmail, e.target.value])} />;
+                            case "SMS": return <TextField required align="left" id="outlined-basic" label="Enter SMS" variant="outlined" onChange={(e) => setUserSMS([...userSMS, e.target.value])} />;
+                            case "ID": return <TextField required align="left" id="outlined-basic" label="Enter ID" variant="outlined" onChange={(e) => setUserID([...userID, e.target.value])} />;
+                          }
+                        })()
+                      }
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -144,3 +174,9 @@ function Entry() {
 }
 
 export default Entry
+
+
+
+
+
+

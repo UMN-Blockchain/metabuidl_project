@@ -2,8 +2,7 @@ import React from "react";
 
 const UserContext = React.createContext({
   account: null,
-  smartContract1: null,
-  smartContract2: null,
+  passifyContract: null,
   web3: null
 });
 
